@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - HexGen | Premium Hosting for Indian Gamers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <style>
+    :root {
+      --primary: #f8b500;
+      --primary-dark: #e6a400;
+      --secondary: #6c63ff;
+      --dark: #0d0d0d;
+      --dark-light: #121212;
+      --gray: #ccc;
+      --light: #fff;
+      --success: #00c853;
+      --danger: #ff3d00;
+      --info: #2979ff;
+      --minecraft: #5DBE5D;
+      --valorant: #FF4655;
+      --fortnite: #5C8DF1;
+      --gta: #FFA500;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background-color: rgba(18, 18, 18, 0.9);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    header.scrolled {
+      padding: 1rem 3rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo i {
+      font-size: 1.5rem;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: var(--gray);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--light);
+    }
+    
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .cta {
+      background: var(--primary);
+      color: var(--dark);
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(248, 181, 0, 0.3);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .page-hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 70%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(248, 181, 0, 0.15) 0%, rgba(248, 181, 0, 0) 70%);
+      z-index: -1;
+    }
+    
+    .page-hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #fff 50%, var(--primary) 50%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      background-position: 100%;
+      transition: background-position 1s ease;
+    }
+    
+    .page-hero h1:hover {
+      background-position: 0 100%;
+    }
+    
+    .page-hero p {
+      margin: 1.5rem 0;
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      color: var(--gray);
+    }
+    
+    .breadcrumb a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+    
+    .breadcrumb .separator {
+      opacity: 0.5;
+    }
+    
+    /* Blog Section */
+    .blog {
+      padding: 6rem 3rem;
+      background: var(--dark);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    
+    .section-header p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .blog-card {
+      background: var(--dark-light);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(248, 181, 0, 0.3);
+    }
+    
+    .blog-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .blog-card:hover .blog-image img {
+      transform: scale(1.05);
+    }
+    
+    .blog-content {
+      padding: 1.5rem;
+    }
+    
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    
+    .blog-category {
+      background: rgba(248, 181, 0, 0.2);
+      color: var(--primary);
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    
+    .blog-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .blog-card p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    
+    .read-more:hover {
+      gap: 0.8rem;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+    }
+    
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      background: var(--dark-light);
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .page-link:hover, .page-link.active {
+      background: var(--primary);
+      color: var(--dark);
+    }
+    
+    /* Newsletter */
+    .newsletter {
+      padding: 6rem 3rem;
+      background: var(--dark-light);
+      text-align: center;
+    }
+    
+    .newsletter-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--dark);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .btn {
+      padding: 0.9rem 1.8rem;
+      font-weight: 600;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: var(--dark);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(248, 181, 0, 0.3);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      position: relative;
+    }
+    
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-section p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark-light);
+      padding: 4rem 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .footer-col ul {
+      list-style: none;
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-col ul li a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .footer-col ul li a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--gray);
+      transition: all 0.2s ease;
+    }
+    
+    .footer-social a:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .page-hero {
+        padding: 7rem 2rem 4rem;
+      }
+      
+      .page-hero h1 {
+        font-size: 3rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 2rem;
+      }
+      
+      nav {
+        display: none;
+      }
+      
+      nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--dark-light);
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .blog, .newsletter, .cta-section {
+        padding: 4rem 2rem;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .page-hero {
+        padding: 6rem 1rem 3rem;
+      }
+      
+      .page-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .blog, .newsletter, .cta-section {
+        padding: 3rem 1rem;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  
+  <header id="header">
+    <div class="logo">
+      <i class="fas fa-server"></i>
+      HexGen
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#game-servers">Game Servers</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#testimonials">Testimonials</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="#" class="cta">
+        <i class="fas fa-rocket"></i>
+        Get Started
+      </a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="separator">/</span>
+      <span>Blog</span>
+    </div>
+    <h1>HexGen Blog</h1>
+    <p>Latest news, tutorials, and updates about gaming servers and hosting solutions</p>
+  </section>
+
+  <section class="blog">
+    <div class="section-header">
+      <h2>Latest Articles</h2>
+      <p>Stay updated with the latest in gaming server technology and hosting solutions</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Minecraft Optimization">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Minecraft</span>
+            <span>June 15, 2025</span>
+          </div>
+          <h3>10 Ways to Optimize Your Minecraft Server Performance</h3>
+          <p>Learn the best practices to optimize your Minecraft server for maximum performance and minimal lag.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="DDoS Protection">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Security</span>
+            <span>June 10, 2025</span>
+          </div>
+          <h3>Understanding DDoS Attacks and How to Protect Your Server</h3>
+          <p>A comprehensive guide to understanding DDoS attacks and implementing effective protection measures.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Server Hosting">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Hosting</span>
+            <span>June 5, 2025</span>
+          </div>
+          <h3>Choosing the Right Game Server Hosting for Your Needs</h3>
+          <p>How to select the perfect hosting solution based on your game, player count, and budget.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Valorant Server">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Valorant</span>
+            <span>May 28, 2025</span>
+          </div>
+          <h3>Setting Up a Private Valorant Server for Tournaments</h3>
+          <p>Step-by-step guide to creating your own Valorant tournament server with custom settings.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="VPS Hosting">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">VPS</span>
+            <span>May 20, 2025</span>
+          </div>
+          <h3>Top 5 Benefits of Using a VPS for Game Server Hosting</h3>
+          <p>Discover why a VPS might be the perfect solution for your game server hosting needs.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image">
+          <img src="https://images.unsplash.com/photo-1587202372775-e229f1723a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Minecraft Plugins">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-category">Minecraft</span>
+            <span>May 15, 2025</span>
+          </div>
+          <h3>Must-Have Plugins for Your Minecraft Server in 2025</h3>
+          <p>The essential plugins every Minecraft server admin should consider for their community.</p>
+          <a href="#" class="read-more">
+            Read More
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <a href="#" class="page-link active">1</a>
+      <a href="#" class="page-link">2</a>
+      <a href="#" class="page-link">3</a>
+      <a href="#" class="page-link">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter-container">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Get the latest updates, tutorials, and special offers directly to your inbox</p>
+      <form class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i>
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to Elevate Your Gaming Experience?</h2>
+    <p>Join thousands of Indian gamers who've already discovered the HexGen difference.</p>
+    <a href="index.html#pricing" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">
+      <i class="fas fa-server"></i>
+      View Pricing Plans
+    </a>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>HexGen</h3>
+        <p>Premium gaming hosting solutions for Indian gamers. Experience the best performance with our low-latency servers.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Minecraft Hosting</a></li>
+          <li><a href="#">VPS Hosting</a></li>
+          <li><a href="#">Dedicated Servers</a></li>
+          <li><a href="#">DDoS Protection</a></li>
+          <li><a href="#">Server Management</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="knowledge-base.html">Knowledge Base</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Ticket Support</a></li>
+          <li><a href="#">Live Chat</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 HexGen. All rights reserved.<br> | DDoS Protection | Instant Setup |<br> | Trusted by 1000+ customers | <br> | 99.9% Uptime |</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+    
+    // Header Scroll Effect
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Newsletter Form Submission
+    const newsletterForm = document.querySelector('.newsletter-form');
+    
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = newsletterForm.querySelector('input').value;
+      alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter.`);
+      newsletterForm.reset();
+    });
+    
+    // Initialize particles.js
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#f8b500"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          }
+        },
+        "opacity": {
+          "value": 0.3,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#f8b500",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
